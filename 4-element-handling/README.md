@@ -79,3 +79,141 @@ root.render(<App/>);
 console.log("script end")
 ```
 ![buttons](../images/buttons.png)
+
+## useRef / ref
+in a scenario of focusing input on load with vanilla: `document.getElementById().focus();`
+```javascript
+const rootElement = document.getElementById("root");
+const root = ReactDOM.createRoot(rootElement);
+const App = () => {
+    React.useEffect(() => {
+        document.getElementById("input").focus();
+    }, []);
+
+    return <>
+        <input id="input" />
+    </>;
+}
+
+root.render(<App/>);
+```
+React provides `useRef()` hook to use instead of id, which can be given as props
+```javascript
+const rootElement = document.getElementById("root");
+const root = ReactDOM.createRoot(rootElement);
+const App = () => {
+    const inputRef = React.useRef();
+    const divRef = React.useRef();
+    React.useEffect(() => {
+        inputRef.current.focus();
+
+        setTimeout(() => {
+            divRef.current.style.backgroundColor = "dodgerblue"
+        }, 3000);
+    }, []);
+    return <>
+        <input ref={inputRef} />
+        <div
+            ref={divRef}
+            style={{ height: 100, width: 300, backgroundColor: "aliceblue"}}>
+
+        </div>
+    </>;
+}
+
+root.render(<App/>);
+```
+## React forms
+```javascript
+const rootElement = document.getElementById("root");
+const root = ReactDOM.createRoot(rootElement);
+const App = () => {
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        const eventElements = event.target.elements;
+        alert(`FirstName: ${eventElements.fname.value}, LastName: ${eventElements.lname.value}, ChosenCar: ${eventElements.cars.value}`);
+    };
+
+    return <form onSubmit={handleSubmit}>
+        <label htmlFor="fname">First name:</label>
+            <br/>
+        <input type="text" id="fname" name="fname" defaultValue="John" />
+            <br/>
+        <label htmlFor="lname">Last name:</label>
+            <br/>
+        <input type="text" id="lname" name="lname" defaultValue="Doe" />
+            <br/>
+            <br/>
+        <label htmlFor="cars">Choose a car:</label>
+        <select id="cars" name="cars">
+            <option value="volvo">Volvo</option>
+            <option value="saab">Saab</option>
+            <option value="fiat">Fiat</option>
+            <option value="audi">Audi</option>
+        </select>
+            <br/>
+        <input type="submit" value="Submit" />
+    </form>;
+}
+```
+simple react form usage. `htmlFor` instead of attribute `for`, `defaultValue` instead of `value`. `onSubmit` event handler, preventDefault is still used.
+```javascript
+const rootElement = document.getElementById("root");
+const root = ReactDOM.createRoot(rootElement);
+const App = () => {
+
+    const phoneInputRef = React.useRef();
+    React.useEffect(() => {
+        phoneInputRef.current.focus();
+    }, []);
+
+    const [message, setMessage] = React.useState("");
+    const [inputNumber, setInputNumber] = React.useState("");
+
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        if (inputNumber.startsWith(0)) {
+            alert(inputNumber);
+            setMessage("Phone Number submitted");
+        } else {
+            setMessage("Phone Number should start  with 0");
+        }
+    };
+
+    const handleChange = (event) => {
+        const eventValue = event.target.value;
+        if(eventValue.startsWith(0)){
+            setMessage("Phone Number is valid");
+            setInputNumber(eventValue);
+        } else if (event.target.value.length === 0) {
+            setInputNumber("");
+            setMessage("");
+        } else {
+            setMessage("Phone Number should start with 0")
+            setInputNumber("");
+        }
+    }
+
+    return <form onSubmit={handleSubmit}>
+        <label htmlFor="phone">Phone Number: </label>
+        <input
+            id="phone"
+            name="phone"
+            ref={phoneInputRef}
+            onChange={handleChange}
+            value={inputNumber}
+        />
+        <p>{message}</p>
+        <br/>
+        <button type="submit" >Submit</button>
+    </form>;
+}
+
+root.render(<App/>);
+```
+`input` elements with `value` attributes as state variables are called controlled component. Controlled components' input value is **always** driven by the React state.
+
+## Exception (Error) Handling
+
+

@@ -11,26 +11,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>index</title>
-
-    <style>
-        .button {
-            background-color: #4CAF50; /* Green */
-            border: none;
-            color: white;
-            padding: 15px 32px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 4px 2px;
-            cursor: pointer;
-        }
-
-        .button-blue {background-color: #008CBA;} /* Blue */
-        .button-red {background-color: #f44336;} /* Red */
-        .button-grey {background-color: #e7e7e7; color: black;} /* Gray */
-        .button-black {background-color: #555555;} /* Black */
-    </style>
 </head>
 <body>
     <main id="root"></main>
@@ -38,26 +18,11 @@
         const rootElement = document.getElementById("root");
         const root = ReactDOM.createRoot(rootElement);
 
-        function Button({ className, style, ...rest }) {
-            return <button
-                className={`button ${className}`}
-                style={{ fontSize: 20, borderRadius: 8, ...style }}
-                {...rest}
-            />;
-        }
-
         const App = () => {
-            return <>
-                <Button style={{ borderRadius: "50%" }}>Green</Button>
-                <Button className="button-blue" style={{ borderRadius: 15 }}>Blue</Button>
-                <Button className="button-red">Red</Button>
-                <Button className="button-grey">Gray</Button>
-                <Button className="button-black">Black</Button>
-            </>;
+            return <></>;
         }
 
         root.render(<App/>);
-        console.log("script end")
     </script>
 </body>
 </html> 
