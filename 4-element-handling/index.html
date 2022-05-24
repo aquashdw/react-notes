@@ -139,7 +139,6 @@
                 <input
                     id="phone"
                     name="phone"
-                    ref={phoneInputRef}
                     onChange={handleChange}
                     value={inputNumber}
                 />
@@ -173,11 +172,15 @@
 
         const App = () => {
             return <>
-                <p>App</p>
+                <h1>Element Handling</h1>
                 <ButtonList/>
+                <br/>
                 <RefTesting/>
+                <br/>
                 <ExampleForm/>
+                <br/>
                 <PhoneInputForm/>
+                <br/>
                 <ErrorBoundary fallback={<h1>ERROR</h1>}>
                     <FailingChild />
                 </ErrorBoundary>
