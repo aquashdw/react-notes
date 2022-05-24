@@ -158,8 +158,6 @@ const App = () => {
 ```
 simple react form usage. `htmlFor` instead of attribute `for`, `defaultValue` instead of `value`. `onSubmit` event handler, preventDefault is still used.
 ```javascript
-const rootElement = document.getElementById("root");
-const root = ReactDOM.createRoot(rootElement);
 const App = () => {
 
     const phoneInputRef = React.useRef();
@@ -209,11 +207,65 @@ const App = () => {
         <button type="submit" >Submit</button>
     </form>;
 }
-
-root.render(<App/>);
 ```
 `input` elements with `value` attributes as state variables are called controlled component. Controlled components' input value is **always** driven by the React state.
 
 ## Exception (Error) Handling
+We could use inherited class of `React.Component` to serve as try - catch boundaries
+```javascript
+class ErrorBoundary extends React.Component {
+    state = { error: null };
+    static getDerivedStateFromError(error) {
+        return {error};
+    }
 
+    render() {
+        const {error} = this.state;
+        if (error) {
+            return <p>Somethings wrong...</p>
+        }
+        return this.props.children;
+    }
+}
+
+const FailingChild = () => {
+    throw new Error("Deliberately thrown error");
+    return <p>Child...</p>;
+}
+
+const App = () => {
+    return <>
+        <p>App</p>
+        <ErrorBoundary>
+            <FailingChild />
+        </ErrorBoundary>
+    </>;
+}
+```
+and can hand down some more data as props
+```javascript
+class ErrorBoundary extends React.Component {
+    // omitted
+
+    render() {
+        const {error} = this.state;
+        if (error) {
+            return this.props.fallback ?
+                this.props.fallback :
+                <p>Somethings wrong...</p>;
+        }
+        return this.props.children;
+    }
+}
+// omitted
+const App = () => {
+    return <>
+        <p>App</p>
+        <ErrorBoundary fallback={<h1>ERROR</h1>}>
+            <FailingChild />
+        </ErrorBoundary>
+    </>;
+}
+```
+Error Boundaries can only be made with class components
 
