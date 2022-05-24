@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<!--    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>-->
+<!--    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>-->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>index</title>
+    <style>
+        .button {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+
+        .button-blue {background-color: #008CBA;} /* Blue */
+        .button-red {background-color: #f44336;} /* Red */
+        .button-grey {background-color: #e7e7e7; color: black;} /* Gray */
+        .button-black {background-color: #555555;} /* Black */
+    </style>
+</head>
+<body>
+    <main id="root"></main>
+    <script type="text/babel">
+        const rootElement = document.getElementById("root");
+        const root = ReactDOM.createRoot(rootElement);
+
+        function Button({ className, style, ...rest }) {
+            // spread given styles after default styles,
+            // css specificity goes selector - element - latter,
+            // so style given as props have highest priority in this example
+            return <button
+                className={`button ${className}`}
+                style={{ fontSize: 20, borderRadius: 8, ...style }}
+                {...rest}
+            />;
+        }
+
+        const ButtonList = () => {
+            return <>
+                <Button style={{ borderRadius: "50%" }}>Green</Button>
+                <Button className="button-blue" style={{ borderRadius: 15 }}>Blue</Button>
+                <Button className="button-red">Red</Button>
+                <Button className="button-grey">Gray</Button>
+                <Button className="button-black">Black</Button>
+            </>;
+        }
+
+        const RefTesting = () => {
+            const inputRef = React.useRef();
+            const divRef = React.useRef();
+            React.useEffect(() => {
+                inputRef.current.focus();
+
+                setTimeout(() => {
+                    divRef.current.style.backgroundColor = "dodgerblue"
+                }, 3000);
+            }, []);
+            return <>
+                <input ref={inputRef} />
+                <div
+                    ref={divRef}
+                    style={{ height: 100, width: 300, backgroundColor: "aliceblue"}}>
+                </div>
+            </>;
+        }
+
+        const ExampleForm = () => {
+            const handleSubmit = (event) => {
+                event.preventDefault();
+                const eventElements = event.target.elements;
+                alert(`FirstName: ${eventElements.fname.value}, LastName: ${eventElements.lname.value}, ChosenCar: ${eventElements.cars.value}`);
+            };
+
+            return <form onSubmit={handleSubmit}>
+                <label htmlFor="fname">First name:</label>
+                <br/>
+                <input type="text" id="fname" name="fname" defaultValue="John" />
+                <br/>
+                <label htmlFor="lname">Last name:</label>
+                <br/>
+                <input type="text" id="lname" name="lname" defaultValue="Doe" />
+                <br/>
+                <br/>
+                <label htmlFor="cars">Choose a car:</label>
+                <select id="cars" name="cars">
+                    <option value="volvo">Volvo</option>
+                    <option value="saab">Saab</option>
+                    <option value="fiat">Fiat</option>
+                    <option value="audi">Audi</option>
+                </select>
+                <br/>
+                <input type="submit" value="Submit" />
+            </form>;
+        }
+
+        const PhoneInputForm = () => {
+            const [message, setMessage] = React.useState("");
+            const [inputNumber, setInputNumber] = React.useState("");
+
+            const handleSubmit = (event) => {
+                event.preventDefault();
+                if (inputNumber.startsWith(0)) {
+                    alert(inputNumber);
+                    setMessage("Phone Number submitted");
+                } else {
+                    setMessage("Phone Number should start  with 0");
+                }
+            };
+
+            const handleChange = (event) => {
+                const eventValue = event.target.value;
+                if(eventValue.startsWith(0)){
+                    setMessage("Phone Number is valid");
+                    setInputNumber(eventValue);
+                } else if (event.target.value.length === 0) {
+                    setInputNumber("");
+                    setMessage("");
+                } else {
+                    setMessage("Phone Number should start with 0")
+                    setInputNumber("");
+                }
+            }
+
+            return <form onSubmit={handleSubmit}>
+                <label htmlFor="phone">Phone Number: </label>
+                <input
+                    id="phone"
+                    name="phone"
+                    ref={phoneInputRef}
+                    onChange={handleChange}
+                    value={inputNumber}
+                />
+                <p>{message}</p>
+                <br/>
+                <button type="submit" >Submit</button>
+            </form>;
+        }
+
+        class ErrorBoundary extends React.Component {
+            state = { error: null };
+            static getDerivedStateFromError(error) {
+                return {error};
+            }
+
+            render() {
+                const {error} = this.state;
+                if (error) {
+                    return this.props.fallback ?
+                        this.props.fallback :
+                        <p>Somethings wrong...</p>;
+                }
+                return this.props.children;
+            }
+        }
+
+        const FailingChild = () => {
+            throw new Error("Deliberately thrown error");
+            return <p>Child...</p>;
+        }
+
+        const App = () => {
+            return <>
+                <p>App</p>
+                <ButtonList/>
+                <RefTesting/>
+                <ExampleForm/>
+                <PhoneInputForm/>
+                <ErrorBoundary fallback={<h1>ERROR</h1>}>
+                    <FailingChild />
+                </ErrorBoundary>
+            </>;
+        }
+
+        root.render(<App/>);
+    </script>
+</body>
+</html> 

@@ -21,9 +21,6 @@ We can use className for css selectors
 .button-black {background-color: #555555;} /* Black */
 ```
 ```javascript
-const rootElement = document.getElementById("root");
-const root = ReactDOM.createRoot(rootElement);
-
 // be aware, the entire parameter for React Components are props,
 // Component({ props }) would not spread
 function Button({ className, style, ...rest }) {
@@ -45,15 +42,9 @@ const App = () => {
         <Button className="button-black">Black</Button>
     </>;
 }
-
-root.render(<App/>);
-console.log("script end")
 ```
 Getting used to spreading props and other parameters are useful...?
 ```javascript
-const rootElement = document.getElementById("root");
-const root = ReactDOM.createRoot(rootElement);
-
 function Button({ className, style, ...rest }) {
     // spread given styles after default styles,
     // css specificity goes selector - element - latter,
@@ -74,17 +65,12 @@ const App = () => {
         <Button className="button-black">Black</Button>
     </>;
 }
-
-root.render(<App/>);
-console.log("script end")
 ```
 ![buttons](../images/buttons.png)
 
 ## useRef / ref
 in a scenario of focusing input on load with vanilla: `document.getElementById().focus();`
 ```javascript
-const rootElement = document.getElementById("root");
-const root = ReactDOM.createRoot(rootElement);
 const App = () => {
     React.useEffect(() => {
         document.getElementById("input").focus();
@@ -94,13 +80,9 @@ const App = () => {
         <input id="input" />
     </>;
 }
-
-root.render(<App/>);
 ```
 React provides `useRef()` hook to use instead of id, which can be given as props
 ```javascript
-const rootElement = document.getElementById("root");
-const root = ReactDOM.createRoot(rootElement);
 const App = () => {
     const inputRef = React.useRef();
     const divRef = React.useRef();
@@ -116,17 +98,12 @@ const App = () => {
         <div
             ref={divRef}
             style={{ height: 100, width: 300, backgroundColor: "aliceblue"}}>
-
         </div>
     </>;
 }
-
-root.render(<App/>);
 ```
 ## React forms
 ```javascript
-const rootElement = document.getElementById("root");
-const root = ReactDOM.createRoot(rootElement);
 const App = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -159,7 +136,6 @@ const App = () => {
 simple react form usage. `htmlFor` instead of attribute `for`, `defaultValue` instead of `value`. `onSubmit` event handler, preventDefault is still used.
 ```javascript
 const App = () => {
-
     const phoneInputRef = React.useRef();
     React.useEffect(() => {
         phoneInputRef.current.focus();
