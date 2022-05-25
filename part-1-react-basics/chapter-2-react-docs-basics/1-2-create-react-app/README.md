@@ -1,6 +1,6 @@
 # Setting up environment
 Using Webstorm (Paid)
 
-![img.png](img.png)
+![webstorm license](images/webstorm.png)
 
 Also installed npm ages ago...so skipping notes for this part

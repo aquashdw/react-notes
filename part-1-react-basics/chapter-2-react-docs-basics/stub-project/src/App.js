@@ -1,7 +1,7 @@
 import './App.css';
 import Composition from "./components/4-props/Composition";
-import BeforeComment from "./components/4-props/extraction/BeforeComment";
-import AfterComment from "./components/4-props/extraction/AfterComment";
+import BeforeComment from "./components/4-props/Extraction/BeforeComment";
+import AfterComment from "./components/4-props/Extraction/AfterComment";
 
 function App() {
     return (
