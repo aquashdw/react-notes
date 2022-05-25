@@ -38,7 +38,7 @@ export default class ComponentLifeCycle extends Component {
     render() {
         return (
             <div>
-                <h1>ComponentLifecycle <button onClick={this.handleClick}>Click</button></h1>
+                <h1>ComponentLifeCycle <button onClick={this.handleClick}>Click</button></h1>
                 <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
             </div>
         );
