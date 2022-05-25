@@ -66,7 +66,7 @@ const App = () => {
     </>;
 }
 ```
-![buttons](../images/buttons.png)
+![buttons](images/buttons.png)
 
 ## useRef / ref
 in a scenario of focusing input on load with vanilla: `document.getElementById().focus();`

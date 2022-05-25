@@ -32,7 +32,7 @@ const App = () => {
 }
 ```
 Above is a simple todo list, which would throw a warning.
-![key warning](../images/key-warning.png)
+![key warning](images/key-warning.png)
 Giving a key to the element within the list would shut out this warning.
 ```javascript
 return <>
@@ -49,12 +49,12 @@ A key to an element lets React to realize that it is the same unique element ins
 <details>
 <summary>Before</summary>
 
-![todos-before](../images/todos-before.png)
+![todos-before](images/todos-before.png)
 </details>
 <details>
 <summary>After</summary>
 
-![todos-after](../images/todos-after.png)
+![todos-after](images/todos-after.png)
 </details>
 
 React's re-rendering will work more efficiently when it knows that the remove - then - re-inserted are the same component.
