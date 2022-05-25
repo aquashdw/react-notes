@@ -31,7 +31,7 @@ function Button({ className, style, ...rest }) {
     />;
 }
 
-const App = () => {
+const ButtonList = () => {
     // (Object) props's keys can be given as attributes in Components
     // child elements are also given as props (key: children)
     return <>
@@ -56,7 +56,7 @@ function Button({ className, style, ...rest }) {
     />;
 }
 
-const App = () => {
+const ButtonList = () => {
     return <>
         <Button style={{ borderRadius: "50%" }}>Green</Button>
         <Button className="button-blue" style={{ borderRadius: 15 }}>Blue</Button>
@@ -72,7 +72,7 @@ const App = () => {
 ## useRef / ref
 in a scenario of focusing input on load with vanilla: `document.getElementById().focus();`
 ```javascript
-const App = () => {
+const RefTesting = () => {
     React.useEffect(() => {
         document.getElementById("input").focus();
     }, []);
@@ -84,7 +84,7 @@ const App = () => {
 ```
 React provides `useRef()` hook to use instead of id, which can be given as props
 ```javascript
-const App = () => {
+const RefTesting = () => {
     const inputRef = React.useRef();
     const divRef = React.useRef();
     React.useEffect(() => {
@@ -105,7 +105,7 @@ const App = () => {
 ```
 ## React forms
 ```javascript
-const App = () => {
+const ExampleForm = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
         const eventElements = event.target.elements;
@@ -136,7 +136,7 @@ const App = () => {
 ```
 simple react form usage. `htmlFor` instead of attribute `for`, `defaultValue` instead of `value`. `onSubmit` event handler, preventDefault is still used.
 ```javascript
-const App = () => {
+const PhoneInputForm = () => {
     const phoneInputRef = React.useRef();
     React.useEffect(() => {
         phoneInputRef.current.focus();
@@ -199,7 +199,7 @@ class ErrorBoundary extends React.Component {
     render() {
         const {error} = this.state;
         if (error) {
-            return <p>Somethings wrong...</p>
+            return <p>Something's wrong...</p>
         }
         return this.props.children;
     }
@@ -229,7 +229,7 @@ class ErrorBoundary extends React.Component {
         if (error) {
             return this.props.fallback ?
                 this.props.fallback :
-                <p>Somethings wrong...</p>;
+                <p>Something's wrong...</p>;
         }
         return this.props.children;
     }

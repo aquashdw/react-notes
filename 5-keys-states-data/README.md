@@ -9,7 +9,7 @@ const todos = [
     { id: 4, value: "Go Develop"},
 ]
 
-const App = () => {
+const TodoList = () => {
     const [items, setItems] = React.useState(todos);
     const handleDoneClick = (todo) => {
         setItems(items => items.filter(item => item !== todo));
@@ -64,7 +64,7 @@ React's re-rendering will work more efficiently when it knows that the remove - 
 ## Lifting State Up
 A simple login form...
 ```javascript
-const App = () => {
+const LoginForm = () => {
     const [username, setUsername] = React.useState("");
     const [password, setPassword] = React.useState("");
     const [valid, setValid] = React.useState(false);
@@ -148,7 +148,7 @@ const PasswordInput = (props) => {
     </div>;
 }
 
-const App = () => {
+const LoginForm = () => {
     const valid = false;
     const handleLogin = () => {
 
@@ -185,7 +185,7 @@ const PasswordInput = (props) => {
     </div>;
 }
 
-const App = () => {
+const LoginForm = () => {
     const [username, setUsername] = React.useState("");
     const [password, setPassword] = React.useState("");
     const [valid, setValid] = React.useState(false);
@@ -224,3 +224,87 @@ This is called "lifting state up".
 On occasions when child must know parents state, the state variable has to be handed down to the child Component. If the descendant is far away, it would cause handing the variable multiple times. This is called "drilling", opposite of lifting. This is a condition we would want to avoid.
 
 ## Fetching Data
+Fetching data from a backend server. Since we don't have a server right now, we use [random-data-api](https://random-data-api.com/api/name/random_name?size=5).
+
+```javascript
+const FetchPeople = () => {
+    const [data, setData] = React.useState(null);
+    React.useEffect(() => {
+        fetch("https://random-data-api.com/api/name/random_name?size=5")
+            .then(response => response.json())
+            .then(jsonBody => {
+                console.dir(jsonBody);
+                setData(jsonBody);
+            });
+    }, []);
+
+    return <div>
+        <h2>People</h2>
+        {data ? data.map(item => <p key={item.id}>
+            {item.first_name} {item.last_name}
+        </p>) : <p>Loading...</p>}
+    </div>;
+}
+```
+
+It's just javascript Fetch API. Added some React style processing with `useEffect()` and `useState()`. We could also add catch, and add it to state.
+
+```javascript
+const FetchPeople = () => {
+    const [data, setData] = React.useState(null);
+    const [error, setError] = React.useState("");
+    React.useEffect(() => {
+        fetch("https://random-data-api.com/api/name/random_name?size=5")
+            .then(response => response.json())
+            .then(jsonBody => setData(jsonBody))
+            .catch(error => setError(error.message));
+    }, []);
+
+    if (error) {
+        return <div>
+            <h2>
+                <p>Something's wrong...</p>
+            </h2>
+        </div>
+    }
+
+    return <div>
+        <h2>People</h2>
+        {data ? data.map(item => <p key={item.id}>
+            {item.first_name} {item.last_name}
+        </p>) : <p>Loading...</p>}
+    </div>;
+}
+```
+
+Note that javascript Fetch API **does not throw error on status codes !== 200**, so we need to throw them manually. Consult [MDN Fetch API Reference](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch#checking_that_the_fetch_was_successful) for details.
+```javascript
+const FetchPeople = () => {
+    const [data, setData] = React.useState(null);
+    const [error, setError] = React.useState("");
+    React.useEffect(() => {
+        fetch("https://random-data-api.com/api/name/random_name?size=5")
+            .then(response => {
+                if (!response.ok) throw new Error("response not OK");
+                return response.json()
+            })
+            .then(jsonBody => setData(jsonBody))
+            .catch(error => setError(error.message));
+    }, []);
+
+    if (error) {
+        return <div>
+            <h2>
+                <p>Something's wrong...</p>
+            </h2>
+        </div>
+    }
+
+    return <div>
+        <h2>People</h2>
+        {data ? data.map(item => <p key={item.id}>
+            {item.first_name} {item.last_name}
+        </p>) : <p>Loading...</p>}
+    </div>;
+}
+```

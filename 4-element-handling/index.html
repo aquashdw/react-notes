@@ -159,7 +159,7 @@
                 if (error) {
                     return this.props.fallback ?
                         this.props.fallback :
-                        <p>Somethings wrong...</p>;
+                        <p>Something's wrong...</p>;
                 }
                 return this.props.children;
             }
@@ -181,8 +181,11 @@
                 <br/>
                 <PhoneInputForm/>
                 <br/>
+                <ErrorBoundary>
+                    <FailingChild/>
+                </ErrorBoundary>
                 <ErrorBoundary fallback={<h1>ERROR</h1>}>
-                    <FailingChild />
+                    <FailingChild/>
                 </ErrorBoundary>
             </>;
         }

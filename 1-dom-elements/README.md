@@ -53,6 +53,7 @@ const innerElement = (
     </>
 );
 ```
+This will render elements without a parent element
 
 ## functions to return elements
 ```javascript
