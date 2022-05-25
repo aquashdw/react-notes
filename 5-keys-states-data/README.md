@@ -32,7 +32,9 @@ const App = () => {
 }
 ```
 Above is a simple todo list, which would throw a warning.
+
 ![key warning](images/key-warning.png)
+
 Giving a key to the element within the list would shut out this warning.
 ```javascript
 return <>

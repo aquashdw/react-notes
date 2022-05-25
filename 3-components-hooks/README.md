@@ -158,6 +158,7 @@ root.render(<App/>);
 
 ## hook flow
 side-effects (`React.useEffect()`) is called after render. Some difference in 17 - 18 Lecture says use effect is called after `ReactDOM.render()`, but when using `ReactDOM.createRoot()` - `root.render()`, render starts after entire script
+
 ![render-logs](images/render-logs.png)
 
 ### cleanup function
@@ -198,7 +199,9 @@ const Child = () => {
     return element;
 }
 ```
+
 ![useeffect-cleanup](images/useeffect-cleanup.png)
+
 where we can add code for cleaning up data (such as local storage)
 ### parent - child cleanup
 Cleanup is called before useEffect, if parent `useEffect()` returns cleanup function, it is called before child `useEffect()`
@@ -216,7 +219,9 @@ React.useEffect(() => {
     return () => { console.log("APP useEffect, [show] [Cleanup]"); }
 }, [show]);
 ```
+
 ![cleanup-flow](images/cleanup-flow.png)
+
 <details>
     <summary>full code at this point</summary>
 
