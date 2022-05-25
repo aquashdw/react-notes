@@ -1,1 +1,2 @@
-# React JS 공부 노트
+# ReactJS Notes
+ReactJS notes after attending lecture
