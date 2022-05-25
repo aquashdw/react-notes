@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<!--    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>-->
+<!--    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>-->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>index</title>
+</head>
+<body>
+    <main id="root"></main>
+    <script type="text/babel">
+        const rootElement = document.getElementById("root");
+        const root = ReactDOM.createRoot(rootElement);
+
+        const todos = [
+            { id: 1, value: "Make Bed"},
+            { id: 2, value: "Eat Breakfast"},
+            { id: 3, value: "Shower"},
+            { id: 4, value: "Go Develop"},
+        ];
+
+        const TodoList = () => {
+            const [items, setItems] = React.useState(todos);
+            const handleDoneClick = (todo) => {
+                setItems(items => items.filter(item => item !== todo));
+            }
+
+            const handleRestoreClick = () => {
+                if (items.length !== todos.length)
+                    setItems(items => [...items, todos.find(item => !items.includes(item))])
+            }
+
+            return <>
+                {items.map((todo) =>
+                    <div key={todo.id} style={{ marginBottom: 10 }}>
+                        <span>{todo.value} </span>
+                        <button onClick={() => handleDoneClick(todo)}>Done</button>
+                    </div>
+                )}
+                <div>
+                    <button onClick={handleRestoreClick}>Restore</button>
+                </div>
+            </>;
+        }
+
+        const UsernameInput = (props) => {
+            return <div>
+                <label htmlFor="username">ID: </label>
+                <input
+                    onChange={props.handleChange}
+                />
+            </div>;
+        }
+
+        const PasswordInput = (props) => {
+            return <div>
+                <label htmlFor="password">PW: </label>
+                <input
+                    type="password"
+                    onChange={props.handleChange}
+                    style={{ marginRight: 5 }}
+                />
+                {props.children}
+            </div>;
+        }
+
+        const LoginForm = () => {
+            const [username, setUsername] = React.useState("");
+            const [password, setPassword] = React.useState("");
+            const [valid, setValid] = React.useState(false);
+            const handleLogin = (event) => {
+                event.preventDefault();
+                alert(`Username: ${username}, Password: ${password.split("").map(item => "*").join("")}`)
+            }
+            const handleChangeUsername = (event) => {
+                setUsername(event.target.value);
+            }
+            const handleChangePassword = (event) => {
+                setPassword(event.target.value);
+            }
+
+            React.useEffect(() => {
+                if (username.length !== 0 && password.length !== 0) setValid(true);
+                else setValid(false);
+            }, [username, password]);
+
+            return <form>
+                <UsernameInput handleChange={handleChangeUsername}/>
+                <PasswordInput handleChange={handleChangePassword}>
+                    <button
+                        type="submit"
+                        disabled={!valid}
+                        onClick={handleLogin}
+                    >Login</button>
+                </PasswordInput>
+            </form>;
+        }
+
+        const App = () => {
+            return <>
+                <TodoList />
+                <br/>
+                <LoginForm />
+            </>;
+        }
+
+        root.render(<App/>);
+    </script>
+</body>
+</html> 
