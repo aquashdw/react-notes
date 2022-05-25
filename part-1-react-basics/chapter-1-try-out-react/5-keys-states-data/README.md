@@ -49,12 +49,12 @@ return <>
 ```
 A key to an element lets React to realize that it is the same unique element instance. Above example for instance, pressing `done` and `restore` will re-order the items:
 <details>
-<summary>Before</summary>
+<summary>BeforeComment</summary>
 
 ![todos-before](images/todos-before.png)
 </details>
 <details>
-<summary>After</summary>
+<summary>AfterComment</summary>
 
 ![todos-after](images/todos-after.png)
 </details>
