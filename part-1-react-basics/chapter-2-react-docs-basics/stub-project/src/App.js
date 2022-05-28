@@ -7,6 +7,7 @@ import ComponentLifeCycle from "./components/6-lifecycle/ComponentLifeCycle";
 import FunctionalComponent from "./components/5-state/FunctionalComponent";
 import Event from "./components/7-events/Event";
 import Condition from "./components/8-conditional-render/Condition";
+import List from "./components/9-list/List";
 
 function App() {
     return (
@@ -19,6 +20,7 @@ function App() {
             <AfterComment />
             <Event />
             <Condition />
+            <List />
         </div>
     );
 }
