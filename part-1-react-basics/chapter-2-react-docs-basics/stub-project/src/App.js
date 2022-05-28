@@ -5,6 +5,7 @@ import AfterComment from "./components/4-props/Extraction/AfterComment";
 import ClassComponent from "./components/5-state/ClassComponent";
 import ComponentLifeCycle from "./components/6-lifecycle/ComponentLifeCycle";
 import FunctionalComponent from "./components/5-state/FunctionalComponent";
+import Event from "./components/7-events/Event";
 
 function App() {
     return (
@@ -15,6 +16,7 @@ function App() {
             <Composition />
             <BeforeComment />
             <AfterComment />
+            <Event />
         </div>
     );
 }
