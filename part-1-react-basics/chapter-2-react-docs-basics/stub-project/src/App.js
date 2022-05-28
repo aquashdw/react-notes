@@ -8,6 +8,9 @@ import FunctionalComponent from "./components/5-state/FunctionalComponent";
 import Event from "./components/7-events/Event";
 import Condition from "./components/8-conditional-render/Condition";
 import List from "./components/9-list/List";
+import ControlledComponent from "./components/10-form/ControlledComponent";
+import UnControlledComponent from "./components/10-form/UnControlledComponent";
+import MultiInputComponent from "./components/10-form/MultiInputComponent";
 
 function App() {
     return (
@@ -21,6 +24,9 @@ function App() {
             <Event />
             <Condition />
             <List />
+            <ControlledComponent />
+            <UnControlledComponent />
+            <MultiInputComponent />
         </div>
     );
 }
