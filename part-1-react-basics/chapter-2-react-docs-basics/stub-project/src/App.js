@@ -6,6 +6,7 @@ import ClassComponent from "./components/5-state/ClassComponent";
 import ComponentLifeCycle from "./components/6-lifecycle/ComponentLifeCycle";
 import FunctionalComponent from "./components/5-state/FunctionalComponent";
 import Event from "./components/7-events/Event";
+import Condition from "./components/8-conditional-render/Condition";
 
 function App() {
     return (
@@ -17,6 +18,7 @@ function App() {
             <BeforeComment />
             <AfterComment />
             <Event />
+            <Condition />
         </div>
     );
 }
