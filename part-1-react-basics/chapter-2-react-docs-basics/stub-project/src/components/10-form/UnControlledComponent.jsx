@@ -1,7 +1,7 @@
-import React from "react";
+import {useRef} from "react";
 
 export default function UnControlledComponent() {
-    const fileInputRef = React.useRef();
+    const fileInputRef = useRef();
 
     const  handleSubmit = (e) => {
         e.preventDefault();

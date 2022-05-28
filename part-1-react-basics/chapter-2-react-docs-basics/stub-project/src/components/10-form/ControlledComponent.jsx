@@ -1,9 +1,9 @@
-import React from "react";
+import {useState} from "react";
 
 export default function ControlledComponent() {
-    const [name, setName] = React.useState("");
-    const [essay, setEssay] = React.useState("Please write an essay about your favorite DOM element.");
-    const [flavor, setFlavor] = React.useState("coconut");
+    const [name, setName] = useState("");
+    const [essay, setEssay] = useState("Please write an essay about your favorite DOM element.");
+    const [flavor, setFlavor] = useState("coconut");
 
     const handleSubmit = (e) => {
         e.preventDefault();
