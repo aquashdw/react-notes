@@ -5,6 +5,7 @@ import WelcomeDialog from "./components/2-composition/WelcomeDialog";
 import ThankYouModal from "./components/3-composition/ThankYouModal";
 import Button from "./components/4-hoc/Button";
 import Input from "./components/4-hoc/Input";
+import Memo from "./components/5-memoization/Memo";
 
 
 function App() {
@@ -13,9 +14,10 @@ function App() {
             <State />
             <Reducer />
             <WelcomeDialog />
-            <ThankYouModal />
+            <ThankYouModal /><br />
             <Input />
             <Button />
+            <Memo />
         </div>
     );
 }
