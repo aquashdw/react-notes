@@ -1,6 +1,6 @@
 import {useState} from "react";
 
-export default function Modal(props){
+export default function Modal({ title, description, button }){
     const [isOpen, setIsOpen] = useState(false);
 
     return <>
@@ -15,14 +15,14 @@ export default function Modal(props){
             padding: 24,
             backgroundColor: "white"
         }}>
-            { typeof props.title === "string" ? <h1>{props.title}</h1> : props.title }
-            { typeof props.description === "string" ? <h5>{props.description}</h5> : props.description }
-            { typeof props.button == "string" ?
+            { typeof title === "string" ? <h1>{title}</h1> : title }
+            { typeof description === "string" ? <h5>{description}</h5> : description }
+            { typeof button == "string" ?
                 <button style={{
                     backgroundColor: "dodgerblue",
                     color: "wheat"
-                }} onClick={() => setIsOpen(false)}>{props.button}</button> :
-                <div onClick={() => setIsOpen(false)}>{props.button}</div>
+                }} onClick={() => setIsOpen(false)}>{button}</button> :
+                <div onClick={() => setIsOpen(false)}>{button}</div>
             }
         </div>}
         {isOpen && <div style={{

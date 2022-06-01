@@ -1,7 +1,7 @@
 import "./CommentItem.css";
 import {memo, Profiler, useMemo, useState} from "react";
 
-function CommentItem(props){
+function CommentItem({ title, content, likes, onClick }){
     const [clickCount, setClickCount] = useState(0);
 
     function onRenderCallback(
@@ -13,24 +13,24 @@ function CommentItem(props){
         commitTime, // when React committed this update
         interactions // the Set of interactions belonging to this update
     ) {
-        console.log(`actualDuration(${props.title}: ${actualDuration})`);
+        console.log(`actualDuration(${title}: ${actualDuration})`);
     }
 
     const handleClick = () => {
-        props.onClick();
+        onClick();
         setClickCount(prev => prev + 1);
     }
 
     const rate = useMemo(() => {
-        console.log(`rate check: ${props.title}`)
-        return props.likes > 10 ? "Good" : "Bad";
-    }, [props.likes])
+        console.log(`rate check: ${title}`)
+        return likes > 10 ? "Good" : "Bad";
+    }, [likes])
 
     return <Profiler id="CommentItem" onRender={onRenderCallback}>
         <div className="CommentItem" onClick={handleClick}>
-            <div>Title: {props.title}</div>
-            <div>Content: {props.content}</div>
-            <div>Likes: {props.likes}</div>
+            <div>Title: {title}</div>
+            <div>Content: {content}</div>
+            <div>Likes: {likes}</div>
             <div>Rate: {rate}</div>
             <div>ClickCount: {clickCount}</div>
         </div>

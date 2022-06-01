@@ -1,5 +1,5 @@
-export default function Dialog(props){
+export default function Dialog({ children }){
     return <div style={{ backgroundColor: "moccasin" }}>
-        {props.children}
+        {children}
     </div>;
 }

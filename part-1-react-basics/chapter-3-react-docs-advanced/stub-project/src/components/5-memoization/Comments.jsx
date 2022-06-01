@@ -1,13 +1,13 @@
 import CommentItem from "./CommentItem";
 import {useCallback} from "react";
 
-export default function Comments(props){
+export default function Comments({ commentList }){
     const handleClick = useCallback(() => {
 
     }, []);
 
     return <div>
-        {props.commentList?.map(item => <CommentItem
+        {commentList?.map(item => <CommentItem
             key={item.title}
             title={item.title}
             content={item.content}

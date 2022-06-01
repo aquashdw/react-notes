@@ -1,6 +1,6 @@
 import withLoading from "./withLoading";
 
-function Button(props){
+function Button(){
     return <div><button>Button</button></div>;
 }
 
